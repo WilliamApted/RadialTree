@@ -86,6 +86,22 @@ namespace RadialTree
             return null;
         }
 
+        /// <summary>
+        /// Finds every node that is below this node which matches.
+        /// </summary>
+        /// <returns>Matched nodes if found.</returns>
+        public List<TreeNode<T>> FindTreeNodes(Func<TreeNode<T>, bool> predicate)
+        {
+            var nodes = _children.Where(predicate).ToList();
+
+            foreach (var checkNode in _children)
+            {
+                nodes.AddRange(checkNode.FindTreeNodes(predicate));
+            }
+
+            return nodes;
+        }
+
         public TreeNode<T> FindInChildren(T data)
         {
             int i = 0, l = Count;
