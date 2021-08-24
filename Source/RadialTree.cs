@@ -5,6 +5,15 @@ namespace RadialTree
 {
     public class RadialTree
     {
+        /// <summary>
+        /// Calculate the positions of each node in a radial layout.
+        /// </summary>
+        /// <param name="node">The node you want to create the layout from.</param>
+        /// <param name="alfa">The start angle for the radial layout (Radians).</param>
+        /// <param name="beta">The amount of the circle to use for the radial layout (Radians).</param>
+        /// <param name="circleRadius">Distance between the root node and first children.</param>
+        /// <param name="deltaDistance">Distance between other child nodes.</param>
+        /// <param name="outputGraph">Calculated positions for the nodes.</param>
         public static void RadialPositions(TreeNode<string> node, float alfa, float beta, float circleRadius, float deltaDistance, List<RadialPoint<string>> outputGraph)
         {
             //check if node is root of the tree
