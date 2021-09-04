@@ -5,7 +5,7 @@
     <Authors>William Apted</Authors>
     <Description>A C# Tree structure library with functions for creating a radial tree layout.</Description>
     <PackageIcon>Icon.jpg</PackageIcon>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
