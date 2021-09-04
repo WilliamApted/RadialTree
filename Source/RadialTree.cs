@@ -14,14 +14,14 @@ namespace RadialTree
         /// <param name="circleRadius">Distance between the root node and first children.</param>
         /// <param name="deltaDistance">Distance between other child nodes.</param>
         /// <param name="outputGraph">Calculated positions for the nodes.</param>
-        public static void RadialPositions(TreeNode<string> node, float alfa, float beta, float circleRadius, float deltaDistance, List<RadialPoint<string>> outputGraph)
+        public static void RadialPositions<T>(TreeNode<T> node, float alfa, float beta, float circleRadius, float deltaDistance, List<RadialPoint<T>> outputGraph)
         {
             //check if node is root of the tree
             if (node.IsRoot)
             {
                 node.Point.X = 0;
                 node.Point.Y = 0;
-                outputGraph.Add(new RadialPoint<string>
+                outputGraph.Add(new RadialPoint<T>
                 {
                     Node = node,
                     Point = new Point
@@ -50,7 +50,7 @@ namespace RadialTree
                 child.Point.X = x;
                 child.Point.Y = y;
 
-                outputGraph.Add(new RadialPoint<string>
+                outputGraph.Add(new RadialPoint<T>
                 {
                     Node = child,
                     Point = new Point
