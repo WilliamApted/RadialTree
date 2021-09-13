@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,9 +12,21 @@ namespace RadialTree
 
         private readonly T _data;
         private readonly int _level;
-        private readonly TreeNode<T> _parent;
         private readonly List<TreeNode<T>> _children;
-        private Point _point;
+        private TreeNode<T> _parent;
+
+        private Point _point = new Point();
+
+        [JsonConstructor]
+        public TreeNode(T data, List<TreeNode<T>> children) 
+        {
+            _data = data;
+            _children = children;
+            foreach (var child in children) 
+            {
+                child.Parent = this;
+            }
+        }
 
         public TreeNode(T data)
         {
@@ -31,21 +44,25 @@ namespace RadialTree
         /// <summary>
         /// The nodes level within the tree.
         /// </summary>
+        [JsonIgnore]
         public int Level { get { return _level; } }
 
         /// <summary>
         /// Number of children the node has.
         /// </summary>
+        [JsonIgnore]
         public int Count { get { return _children.Count; } }
 
         /// <summary>
         /// Whether the node is the root of the tree.
         /// </summary>
+        [JsonIgnore]
         public bool IsRoot { get { return _parent == null; } }
 
         /// <summary>
         /// Whether the node is a leaf with no children.
         /// </summary>
+        [JsonIgnore]
         public bool IsLeaf { get { return _children.Count == 0; } }
 
         /// <summary>
@@ -61,11 +78,13 @@ namespace RadialTree
         /// <summary>
         /// The parent of the node.
         /// </summary>
-        public TreeNode<T> Parent { get { return _parent; } }
+        [JsonIgnore]
+        public TreeNode<T> Parent { get { return _parent; } set { _parent = value; } }
 
         /// <summary>
         /// The position of the node (Used for when drawing the tree).
         /// </summary>
+        [JsonIgnore]
         public Point Point { get => _point; set { _point = value; } }
 
         /// <summary>
