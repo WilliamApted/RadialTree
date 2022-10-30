@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>William Apted</Authors>
     <Description>A C# Tree structure library with functions for creating a radial tree layout.</Description>
-    <PackageIcon>Icon.jpg</PackageIcon>
-    <Version>1.0.2</Version>
+    <PackageIcon></PackageIcon>
+    <Version>1.0.3</Version>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -14,14 +14,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\Downloads\Icon.jpg">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

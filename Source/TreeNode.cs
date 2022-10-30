@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace RadialTree
 {
@@ -11,8 +13,8 @@ namespace RadialTree
 
         private readonly T _data;
         private readonly int _level;
-        private readonly TreeNode<T> _parent;
         private readonly List<TreeNode<T>> _children;
+        private TreeNode<T> _parent;
         private Point _point;
 
         public TreeNode(T data)
@@ -28,6 +30,17 @@ namespace RadialTree
             _level = _parent != null ? _parent.Level + 1 : 0;
         }
 
+        [JsonConstructor]
+        public TreeNode(T data, List<TreeNode<T>> children, int level) : this(data)
+        {
+            _children = children;
+            _level = level;
+
+            if (_children != null)
+                foreach (var child in _children)
+                    child.Parent = this;
+        }
+
         /// <summary>
         /// The nodes level within the tree.
         /// </summary>
@@ -36,16 +49,19 @@ namespace RadialTree
         /// <summary>
         /// Number of children the node has.
         /// </summary>
+        [IgnoreDataMember]
         public int Count { get { return _children.Count; } }
 
         /// <summary>
         /// Whether the node is the root of the tree.
         /// </summary>
+        [IgnoreDataMember]
         public bool IsRoot { get { return _parent == null; } }
 
         /// <summary>
         /// Whether the node is a leaf with no children.
         /// </summary>
+        [IgnoreDataMember]
         public bool IsLeaf { get { return _children.Count == 0; } }
 
         /// <summary>
@@ -61,11 +77,13 @@ namespace RadialTree
         /// <summary>
         /// The parent of the node.
         /// </summary>
-        public TreeNode<T> Parent { get { return _parent; } }
+        [IgnoreDataMember]
+        public TreeNode<T> Parent { get { return _parent; } private set { _parent = value; } }
 
         /// <summary>
         /// The position of the node (Used for when drawing the tree).
         /// </summary>
+        [IgnoreDataMember]
         public Point Point { get => _point; set { _point = value; } }
 
         /// <summary>
